@@ -1,0 +1,116 @@
+.container {
+  .article {
+    padding: 2rem 0;
+
+    .title {
+      small {
+        font-family: 'BhuTuka Expanded One', cursive;
+        font-size: 1rem;
+
+        span {
+          color: #f94962;
+        }
+      }
+
+      h1 {
+        font-family: "Shantell Sans", sans-serif;
+        font-size: 3.2rem;
+        color: #36c3ff;
+        word-break: break-all;
+      }
+    }
+
+    .content {
+      display: flex;
+      justify-content: space-between;
+      padding: 2rem 0;
+
+      .description {
+        flex-basis: 70%;
+
+        .quick-summary {
+          font-size: 1.4rem;
+          font-family: 'Josefin Sans', sans-serif;
+          font-style: italic;
+          line-height: 1.45em;
+          padding-bottom: 2rem;
+          border-bottom: 4px solid #244654;
+
+          &:before {
+            content: 'Quick summary ↬ ';
+            font-style: normal;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin: 0;
+            font-weight: 700;
+            color: #d33a2c;
+            text-transform: uppercase;
+          }
+        }
+
+        .main-text {
+          padding-top: 2rem;
+          font-size: 1.4rem;
+          line-height: 1.20em;
+          font-family: 'Josefin Sans', sans-serif;
+
+          :host ::ng-deep a {
+            text-decoration: none;
+          }
+        }
+      }
+
+      .author {
+        flex-basis: 25%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+          transition: .4s;
+          width: 150px;
+          height: 150px;
+          cursor: pointer;
+
+          &:hover {
+            transform: rotatey(180deg);
+          }
+        }
+
+        h4 {
+          color: #f94962;
+          padding: 10px 0;
+        }
+      }
+
+      .actions {
+        flex-basis: 25%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h3 {
+          color: #f94962;
+          padding: 10px 0;
+          font-family: Spinnaker, sans-serif;
+        }
+
+        button {
+          width: 50%;
+          font-weight: 700;
+          color: #fff;
+          font-size: 1.1rem;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+:host ::ng-deep a {
+  text-decoration: none;
+}
+
+:host ::ng-deep img {
+  width: 100%;
+}

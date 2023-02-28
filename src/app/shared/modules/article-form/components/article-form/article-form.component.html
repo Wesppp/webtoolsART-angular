@@ -1,0 +1,104 @@
+<div class="container">
+  <p-card [style]="{maxWidth: '600px'}">
+    <ng-template pTemplate="title">
+      <div class="header">
+        <h2>
+          {{ article ? 'Edit the article' : 'Create your own article' }}
+        </h2>
+      </div>
+    </ng-template>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="p-field">
+        <label for="title" class="input-label">Title</label>
+        <input
+          id="title"
+          type="title"
+          aria-describedby="title-help"
+          pInputText
+          placeholder="Title"
+          formControlName="title"
+        />
+        <div class="input-errors" *ngIf="title?.invalid && (title?.dirty || title?.touched)">
+          <small class="p-error block"
+                 *ngIf="title?.errors?.['required']"
+          >Fill in the field!</small>
+          <small class="p-error block"
+                 *ngIf="title?.errors?.['maxlength']"
+          >The max length of the title is 100!</small>
+          <small class="p-error block"
+                 *ngIf="title?.errors?.['minlength']"
+          >The min length of the title is 10!</small>
+        </div>
+      </div>
+      <div class="p-field">
+        <label for="quickSummary" class="input-label">Quick summary</label>
+        <textarea
+          rows="5"
+          cols="30"
+          pInputTextarea
+          [autoResize]="true"
+          id="quickSummary"
+          formControlName="quickSummary">
+        </textarea>
+        <div class="input-errors" *ngIf="quickSummary?.invalid && (quickSummary?.dirty || quickSummary?.touched)">
+          <small class="p-error block"
+                 *ngIf="quickSummary?.errors?.['required']"
+          >Fill in the field!</small>
+          <small class="p-error block"
+                 *ngIf="quickSummary?.errors?.['maxlength']"
+          >The max length of the short description is 400!</small>
+          <small class="p-error block"
+                 *ngIf="quickSummary?.errors?.['minlength']"
+          >The min length of the short description is 200!</small>
+        </div>
+      </div>
+      <div class="p-field">
+        <label for="description" class="input-label">Description</label>
+        <p-editor [style]="{'height':'320px'}"
+                  id="description"
+                  formControlName="description"
+        ></p-editor>
+        <div class="input-errors" *ngIf="description?.invalid && (description?.dirty || description?.touched)">
+          <small class="p-error block"
+                 *ngIf="description?.errors?.['required']"
+          >Fill in the field!</small>
+          <small class="p-error block"
+                 *ngIf="description?.errors?.['minlength']"
+          >The min length of the description is 500!</small>
+        </div>
+      </div>
+      <div class="p-field">
+        <label for="sourceLink" class="input-label">Source link</label>
+        <input
+          id="sourceLink"
+          type="sourceLink"
+          aria-describedby="sourceLink-help"
+          pInputText
+          placeholder="Source link"
+          formControlName="sourceLink"
+        />
+        <div class="input-errors" *ngIf="sourceLink?.invalid && (sourceLink?.dirty || sourceLink?.touched)">
+          <small class="p-error block"
+                 *ngIf="sourceLink?.errors?.['required']"
+          >Fill in the field!</small>
+          <small class="p-error block"
+                 *ngIf="sourceLink?.errors?.['pattern']"
+          >The string is not a link!</small>
+        </div>
+      </div>
+      <div class="form-footer">
+        <button pButton type="submit"
+                [label]=" article ? 'Update article' : 'Create article'"
+                [disabled]="form.invalid || isSubmitting"
+        ></button>
+      </div>
+      <p-progressBar
+        *ngIf="isSubmitting"
+        mode="indeterminate"
+        [style]="{
+          'height': '6px',
+          'margin': '5px 0'
+        }"></p-progressBar>
+    </form>
+  </p-card>
+</div>

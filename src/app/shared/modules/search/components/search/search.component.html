@@ -1,0 +1,14 @@
+<div class="search">
+  <div class="p-inputgroup">
+    <input type="text"
+           pInputText
+           placeholder="Search"
+           [(ngModel)]="search"
+           #searchRef/>
+    <button type="button"
+            pButton
+            pRipple
+            icon="pi pi-times"
+            (click)="searchRef.value = ''"></button>
+  </div>
+</div>

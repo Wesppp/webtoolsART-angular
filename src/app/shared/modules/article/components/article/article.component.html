@@ -1,0 +1,24 @@
+<p-panel [routerLink]="['/articles', article._id]">
+  <ng-template pTemplate="header">
+    <p-avatar [image]="'assets/icons/avatar-placeholder.svg' || article.author.profileImage"
+              styleClass="mr-2"
+              size="large">
+    </p-avatar>
+    <h2 class="title">{{ article.title }}</h2>
+  </ng-template>
+  <p>{{ article.quickSummary }}</p>
+  <ng-template pTemplate="footer">
+    <div class="footer">
+      <p>
+        <ng-container *ngIf="article.author.username">
+            Written by
+          <span>
+            {{ article.author.username }}
+          </span>.
+        </ng-container>
+        {{ article.createdAt | date: 'MMM d, y' }}
+      </p>
+      <small> Last update {{ article.updatedAt | date: 'MMM d, y' }} </small>
+    </div>
+  </ng-template>
+</p-panel>

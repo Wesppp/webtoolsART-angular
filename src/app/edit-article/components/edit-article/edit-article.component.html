@@ -1,0 +1,12 @@
+<app-error-message
+  [error]="errors$ | async"
+  *ngIf="errors$ | async">
+</app-error-message>
+<app-progress-spinner *ngIf="isLoading$ | async"></app-progress-spinner>
+
+<app-article-form
+  *ngIf="article$ | async"
+  [article]="article$ | async"
+  [isSubmitting]="isSubmitting$ | async"
+  (submitForm)="updateArticle($event)">
+</app-article-form>

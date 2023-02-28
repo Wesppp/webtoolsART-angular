@@ -1,0 +1,20 @@
+<app-error-message
+  *ngIf="errors$ | async"
+  [error]="errors$ | async"
+></app-error-message>
+<app-progress-spinner
+  *ngIf="(isLoading$ | async) && !(feedData$ | async)">
+</app-progress-spinner>
+
+<div *ngIf="feedData$ | async">
+  <ng-container *ngFor="let article of (feedData$ | async)?.articles | search: 'title':search">
+    <app-article
+      [article]="article"
+    ></app-article>
+  </ng-container>
+</div>
+
+
+
+
+

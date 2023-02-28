@@ -1,0 +1,65 @@
+<!--отчистка при смене роута-->
+<app-error-message
+  [error]="errors$ | async">
+</app-error-message>
+
+<app-progress-spinner
+  *ngIf="isLoading$ | async">
+</app-progress-spinner>
+
+<div class="container" *ngIf="article">
+  <div class="article">
+    <div class="title">
+      <small>
+        <span>
+          {{ (isAuthor$ | async) ? 'Your article' : article.author.username }}
+        </span>
+        /
+        {{ article.createdAt | date: 'MMM d, y' }}
+      </small>
+      <h1> {{ article.title }} </h1>
+    </div>
+    <div class="content">
+      <div class="description">
+        <p class="quick-summary">
+          {{ article.quickSummary }}
+        </p>
+        <p
+          class="main-text"
+          [innerHTML]="article.description | sanitizeHtml">
+        </p>
+      </div>
+      <div class="author" *ngIf="!(isAuthor$ | async)">
+        <img
+          [src]="'assets/icons/avatar-placeholder.svg' || article.author.profileImage"
+          [alt]="article.author.username"
+          [routerLink]="['/profile', article.author._id]">
+        <h4>{{'About the author' | uppercase}}</h4>
+        <p> {{ article.author.bio || 'There is no information about ' + article.author.username + '. 🙄' }} </p>
+      </div>
+      <div class="actions" *ngIf="isAuthor$ | async">
+        <h3>{{'Actions on the article' | uppercase}}</h3>
+        <button
+          [routerLink]="['edit']"
+          pButton
+          pRipple
+          type="button"
+          label="Edit"
+          icon="pi pi-pencil"
+          iconPos="right">
+        </button>
+        <button
+          (click)="deleteArticle()"
+          pButton
+          pRipple
+          type="button"
+          label="Delete"
+          class="p-button-danger"
+          icon="pi pi-trash"
+          iconPos="right">
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>

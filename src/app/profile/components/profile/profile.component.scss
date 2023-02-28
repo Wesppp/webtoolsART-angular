@@ -1,0 +1,118 @@
+.container {
+
+  .profile {
+    margin-top: 3rem;
+    display: grid;
+    gap: 5px;
+    grid-template-areas:
+    "avatar about"
+    "info-panel info-panel"
+    "articles articles";
+    grid-template-columns: 1fr 1fr;
+
+    #avatar, #about, #info-panel {
+      padding: 1rem;
+    }
+
+    #avatar {
+      grid-area: avatar;
+      justify-self: center;
+      align-self: center;
+
+      img {
+        width: 250px;
+        height: 250px;
+      }
+
+      .social {
+        list-style-type: none;
+        display: flex;
+        justify-content: space-between;
+        align-self: center;
+        padding-left: 0;
+
+        li {
+          i {
+            font-size: 1.8rem;
+            transition: .2s;
+
+            &:hover {
+              color: #f85565;
+            }
+          }
+        }
+      }
+    }
+
+    #about {
+      grid-area: about;
+
+      h1 {
+        font-family: Spinnaker, sans-serif;
+        color: #2196f3;
+      }
+
+      small {
+        font-family: Spinnaker, sans-serif;
+        display: block;
+        color: #f94962;
+        padding-bottom: 1rem;
+      }
+
+      p {
+        font-family: "Josefin Sans", sans-serif;
+        font-size: 1.2rem;
+      }
+
+      .info {
+        margin-top: 10px;
+
+        ul {
+          padding-left: 0;
+
+          li {
+            font-family: 'Shantell Sans', sans-serif;
+            list-style-type: none;
+            padding: 5px 15px;
+            background-color: #333;
+            border-radius: 4px;
+            margin: 10px 0;
+
+            span {
+              color: #8dd0ff;
+
+              &:after {
+                content: ' ↬ ';
+                font-style: normal;
+                font-size: 1rem;
+                letter-spacing: 2px;
+                margin: 0;
+                font-weight: 700;
+                color: #8dd0ff;
+                text-transform: uppercase;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    #info-panel {
+      grid-area: info-panel;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem 0;
+      background-color: #333;
+      border-radius: 4px;
+
+      h2 {
+        font-family: "Josefin Sans", sans-serif;
+      }
+    }
+
+    #articles {
+      grid-area: articles;
+    }
+  }
+}

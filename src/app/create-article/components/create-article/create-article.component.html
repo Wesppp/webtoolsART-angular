@@ -1,0 +1,6 @@
+<app-error-message [error]="errors$ | async">
+</app-error-message>
+<app-article-form
+  (submitForm)="createArticle($event)"
+  [isSubmitting]="isSubmitting$ | async"
+></app-article-form>

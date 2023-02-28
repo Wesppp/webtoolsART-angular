@@ -1,0 +1,65 @@
+<app-error-message
+  *ngIf="errors$ | async"
+  [error]="errors$ | async"
+></app-error-message>
+<div class="container">
+  <p-card [style]="{width: '500px'}">
+    <ng-template pTemplate="title">
+      <div class="header">
+        <h2>Sign In</h2>
+      </div>
+    </ng-template>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="p-field">
+        <label for="email" class="input-label">Email</label>
+        <input
+          id="email"
+          type="email"
+          aria-describedby="email-help"
+          pInputText
+          formControlName="email"
+          placeholder="Email"/>
+        <div class="input-errors" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+          <small class="p-error block"
+                 *ngIf="email?.errors?.['required']"
+          >Fill in the field!</small>
+          <small class="p-error block"
+                 *ngIf="email?.errors?.['email']"
+          >Enter email!</small>
+        </div>
+      </div>
+      <div class="p-field">
+        <label for="password" class="input-label">Password</label>
+        <p-password id="password"
+                    [inputStyle]="{'width': '100%'}"
+                    [style]="{'width':'100%'}"
+                    [toggleMask]="true"
+                    formControlName="password"
+                    placeholder="Password">
+        </p-password>
+        <div class="input-errors" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+          <small class="p-error block"
+                 *ngIf="password?.errors?.['required']"
+          >Fill in the field!</small>
+          <small class="p-error block"
+                 *ngIf="password?.errors?.['minlength']"
+          >Minimal length is 8!</small>
+        </div>
+      </div>
+      <div class="form-footer">
+        <button pButton type="submit"
+                label="Submit"
+                [disabled]="form.invalid || (isSubmitting$ | async)"
+        ></button>
+      </div>
+      <p-progressBar
+        *ngIf="isSubmitting$ | async"
+        mode="indeterminate"
+        [style]="{
+          'height': '6px',
+          'margin': '5px 0'
+        }"></p-progressBar>
+    </form>
+  </p-card>
+</div>
+

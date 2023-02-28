@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="header">
+    <div class="title">
+      <p>ARTICLES {{ articlesCount$ | async }}</p>
+      <h1>Articles</h1>
+      <small>There you can find different articles about devtools</small>
+    </div>
+      <app-search #search></app-search>
+  </div>
+
+  <hr>
+
+  <app-feed
+    [url]="url"
+    [search]="search.search">
+  </app-feed>
+</div>

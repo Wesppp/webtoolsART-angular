@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  justify-content: center;
+
+  .p-card {
+    margin: 2rem;
+
+    .p-card-content {
+      display: flex;
+      padding: 0;
+
+      .avatar {
+        padding: 2rem 4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 200px;
+          height: 200px;
+        }
+      }
+
+      .settings {
+        border-left: 2px solid #47515e;
+        padding: 2rem 2rem;
+
+        h1 {
+          font-family: "Josefin Sans", sans-serif;
+        }
+
+        form {
+          padding-top: 1rem;
+
+          .p-field {
+            margin-top: 10px;
+
+            textarea {
+              width: 100%;
+            }
+
+            .group {
+              display: flex;
+
+              input {
+                width: 100%;
+              }
+            }
+          }
+
+          .row {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+
+            .p-field {
+              margin-right: 1rem;
+            }
+        }
+
+          .input-label {
+            display: block;
+            margin-bottom: 5px;
+          }
+
+          .form-footer {
+            width: 100%;
+            margin-top: 20px;
+
+            button {
+              width: 100%;
+              text-align: center;
+              font-size: 1.1rem;
+              font-family: Spinnaker, sans-serif;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+:host {
+  ::ng-deep .p-inputmask {
+    width: 100%;
+  }
+
+  ::ng-deep .p-dropdown {
+    width: 100%;
+  }
+}

@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'assets/scss/modules/_fonts.scss';
+
+*,
+*:after,
+*:before {
+  margin: 0;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+@media only screen and (max-width: 600px) { .container { max-width: 100%; } }
+@media only screen and (min-width: 668px) { .container { max-width: 626px; } }
+@media only screen and (min-width: 720px) { .container { max-width: 680px; } }
+@media only screen and (min-width: 768px) { .container { max-width: 740px; } }
+@media only screen and (min-width: 992px) { .container { max-width: 980px; } }
+@media only screen and (min-width: 1200px) { .container { max-width: 1140px; } }
+@media only screen and (min-width: 1400px) { .container { max-width: 1320px; } }
+
+hr {
+  order: 1;
+  background-color: #8dd0ff;
+  border: none;
+  height: 2px;
+  color: #8dd0ff;
+  margin: 5px 0;
+}
+
+label {
+  font-family: "Shantell Sans", sans-serif;
+}

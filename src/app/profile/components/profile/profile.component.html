@@ -1,0 +1,51 @@
+<app-error-message
+  *ngIf="errors$ | async"
+  [error]="errors$ | async">
+</app-error-message>
+<app-progress-spinner *ngIf="isLoading$ | async"></app-progress-spinner>
+
+<div class="container">
+  <div class="profile" *ngIf="userProfile">
+    <div id="avatar">
+      <img src="/assets/icons/avatar-placeholder.svg" alt="">
+      <ul class="social">
+        <li *ngFor="let social of userProfile.user.socialNetworks">
+          <a [href]="social.url">
+            <i [class]="'pi ' + 'pi-' + social.name"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div id="about">
+      <h1>About {{ userProfile.user.username }}</h1>
+      <small>A Lead UX & UI designer based in Canada</small>
+      <p>
+        {{ userProfile.user.bio || 'There is no information about ' + userProfile.user.username + '. 🙄' }}
+      </p>
+      <div class="info">
+        <ul>
+          <li>
+            <span>Username</span> {{ userProfile.user.username }}
+          </li>
+          <li>
+            <span>E-mail</span> {{ userProfile.user.email }}
+          </li>
+          <li>
+            <span>Phone</span> {{ userProfile.user.phone || 'not specified' }}
+          </li>
+          <li>
+            <span>Residence</span> {{ userProfile.user.residence || 'not specified' }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="info-panel">
+      <h2>{{ userProfile.articlesCount }} Articles</h2>
+    </div>
+    <app-feed
+      id="articles"
+      [url]="url + userProfile.user._id">
+    </app-feed>
+  </div>
+</div>
+
