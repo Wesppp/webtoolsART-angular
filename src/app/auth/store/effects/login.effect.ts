@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
 import { loginAction, loginFailureAction, loginSuccessAction } from "../actions/login.action";
 import {PersistanceService} from "../../../shared/services/persistance.service";
 import {AuthResponseInterface} from "../../types/authResponse.interface";
+import {ClearAuthFormService} from "../../services/clear-auth-form.service";
 
 @Injectable()
 export class LoginEffect {
@@ -15,7 +16,8 @@ export class LoginEffect {
   constructor(private actions$: Actions,
               private authService: AuthService,
               private router: Router,
-              private persistenceService: PersistanceService) {}
+              private persistenceService: PersistanceService,
+              private clearAuthFormService: ClearAuthFormService) {}
 
   login$ = createEffect(() => this.actions$.pipe(
     ofType(loginAction),
@@ -24,6 +26,7 @@ export class LoginEffect {
         map((authResponse: AuthResponseInterface) => {
           this.persistenceService.set('accessToken', authResponse.token)
           const currentUser: CurrentUserInterface = authResponse.user
+          this.clearAuthFormService.clearForm()
           return loginSuccessAction({currentUser})
         }),
         catchError((errorResponse: HttpErrorResponse) => {

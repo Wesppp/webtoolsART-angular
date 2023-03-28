@@ -6,14 +6,17 @@
   *ngIf="(isLoading$ | async) && !(feedData$ | async)">
 </app-progress-spinner>
 
-<div *ngIf="feedData$ | async">
+<ng-container *ngIf="feedData$ | async">
   <ng-container *ngFor="let article of (feedData$ | async)?.articles | search: 'title':search">
     <app-article
       [article]="article"
     ></app-article>
   </ng-container>
-</div>
+</ng-container>
 
+<ng-container *ngIf="isFeedDataEmpty$ | async">
+  <h2>There are no articles here</h2>
+</ng-container>
 
 
 

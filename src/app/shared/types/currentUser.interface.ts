@@ -1,5 +1,4 @@
-import { ArticleInterface } from "./article.interface";
-import {SocialNetworksInterface} from "./socialNetworks.interface";
+import { SocialNetworksInterface } from "./socialNetworks.interface";
 
 export interface CurrentUserInterface {
   _id: string
@@ -8,8 +7,10 @@ export interface CurrentUserInterface {
   username: string
   email: string
   bio?: string
+  specialization?: string
   profileImage?: string
-  articles?: string[] | ArticleInterface[]
+  articles?: string[]
+  favoritesArticles?: string[]
   residence?: string
   phone?: string
   socialNetworks: SocialNetworksInterface[]

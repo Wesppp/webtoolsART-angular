@@ -6,8 +6,8 @@
     margin: 2rem;
 
     .p-card-content {
-      display: flex;
       padding: 0;
+      display: flex;
 
       .avatar {
         padding: 2rem 4rem;
@@ -16,9 +16,39 @@
         align-items: center;
         justify-content: center;
 
-        img {
-          width: 200px;
-          height: 200px;
+        .image-container {
+          position: relative;
+          display: inline-block;
+          text-align: center;
+
+          .select-profile-picture {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+          }
+
+          img {
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+          }
+
+          &:hover {
+            opacity: .6;
+          }
+        }
+
+        small {
+          margin: 2px 0;
+
+          span {
+            color: #f85565;
+          }
         }
       }
 
@@ -31,8 +61,6 @@
         }
 
         form {
-          padding-top: 1rem;
-
           .p-field {
             margin-top: 10px;
 
@@ -42,11 +70,17 @@
 
             .group {
               display: flex;
+              margin-top: 2px;
 
               input {
                 width: 100%;
               }
             }
+          }
+
+          .social-networks-footer {
+            margin-top: 10px;
+            text-align: center;
           }
 
           .row {
@@ -57,7 +91,7 @@
             .p-field {
               margin-right: 1rem;
             }
-        }
+          }
 
           .input-label {
             display: block;

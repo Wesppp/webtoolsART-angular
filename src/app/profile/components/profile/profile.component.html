@@ -7,7 +7,9 @@
 <div class="container">
   <div class="profile" *ngIf="userProfile">
     <div id="avatar">
-      <img src="/assets/icons/avatar-placeholder.svg" alt="">
+      <img
+        [src]="userProfile.user.profileImage && '/api/' + userProfile.user.profileImage || '/assets/icons/avatar-placeholder.svg'"
+        alt="Profile image">
       <ul class="social">
         <li *ngFor="let social of userProfile.user.socialNetworks">
           <a [href]="social.url">
@@ -17,8 +19,8 @@
       </ul>
     </div>
     <div id="about">
-      <h1>About {{ userProfile.user.username }}</h1>
-      <small>A Lead UX & UI designer based in Canada</small>
+      <h1>About {{ (isCurrentUser$ | async) ? 'you' : userProfile.user.username }}</h1>
+      <small> {{ userProfile.user.specialization }} </small>
       <p>
         {{ userProfile.user.bio || 'There is no information about ' + userProfile.user.username + '. 🙄' }}
       </p>
@@ -40,7 +42,10 @@
       </div>
     </div>
     <div id="info-panel">
-      <h2>{{ userProfile.articlesCount }} Articles</h2>
+      <h2>
+        <span [style]="{color: '#f94962'}">{{ userProfile.articlesCount }}</span>
+        Articles
+      </h2>
     </div>
     <app-feed
       id="articles"

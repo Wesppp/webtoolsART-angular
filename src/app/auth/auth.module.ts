@@ -21,6 +21,8 @@ import { LogoutEffect } from "./store/effects/logout.effect";
 import { GetCurrentUserEffect } from "./store/effects/getCurrentUser.effect";
 import { ProgressBarModule } from "primeng/progressbar";
 import { AuthGuard } from "./auth.guard";
+import {ClearAuthFormService} from "./services/clear-auth-form.service";
+import {AuthService} from "./services/auth.service";
 
 const routes: Routes = [
   {
@@ -66,7 +68,8 @@ const routes: Routes = [
   ],
   providers: [
     AuthGuard,
-
+    ClearAuthFormService,
+    AuthService
   ]
 })
 export class AuthModule { }

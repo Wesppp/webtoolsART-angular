@@ -20,6 +20,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { EditArticleModule } from "./edit-article/edit-article.module";
 import { ProfileModule } from "./profile/profile.module";
 import { ProfileSettingsModule } from "./profile-settings/profile-settings.module";
+import { FavoriteArticlesModule } from "./favorite-articles/favorite-articles.module";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ProfileSettingsModule } from "./profile-settings/profile-settings.modul
     AppRoutingModule,
     TopBarModule,
     ArticlesModule,
+    FavoriteArticlesModule,
     ProfileModule,
     CreateArticleModule,
     EditArticleModule,

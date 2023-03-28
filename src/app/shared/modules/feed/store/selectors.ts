@@ -22,3 +22,8 @@ export const articlesCountSelector = createSelector(
   feedFeatureSelector,
   (feedState: FeedStateInterface) => feedState.data?.articlesCount || null
 )
+
+export const isFeedDataEmptySelector = createSelector(
+  feedFeatureSelector,
+  (feedState: FeedStateInterface) => feedState.data?.articles.length === 0 || false
+)

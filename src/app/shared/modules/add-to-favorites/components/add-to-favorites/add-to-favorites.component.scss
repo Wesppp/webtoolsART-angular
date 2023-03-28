@@ -1,0 +1,15 @@
+.add-to-favorites {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  button {
+    margin: 10px;
+    transform: scale(1.4);
+  }
+
+  small {
+    font-family: "Shantell Sans", sans-serif;
+    font-size: .8rem;
+  }
+}
