@@ -23,6 +23,7 @@
     "@ngrx/store": "^15.2.1",
     "@ngrx/store-devtools": "^15.2.1",
     "@rxweb/reactive-form-validators": "^13.0.0",
+    "countries-phone-masks": "^1.0.5",
     "primeicons": "^6.0.1",
     "primeng": "^15.2.0",
     "quill": "^1.3.7",

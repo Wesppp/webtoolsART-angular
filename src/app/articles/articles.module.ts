@@ -5,21 +5,27 @@ import { RouterModule, Routes } from "@angular/router";
 import { ArticleModule } from "../shared/modules/article/article.module";
 import { SearchModule } from "../shared/modules/search/search.module";
 import { FeedModule } from "../shared/modules/feed/feed.module";
+import { TabViewModule } from "primeng/tabview";
+import { TabMenuModule } from "primeng/tabmenu";
+import { FeedTogglerModule } from "../shared/modules/feed-toggler/feed-toggler.module";
 
 const routes: Routes = [
   { path: '', component: ArticlesComponent }
 ];
 
 @NgModule({
-  declarations: [
-    ArticlesComponent
-  ],
+    declarations: [
+        ArticlesComponent
+    ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ArticleModule,
     SearchModule,
-    FeedModule
+    FeedModule,
+    TabViewModule,
+    TabMenuModule,
+    FeedTogglerModule
   ],
     exports: [
         ArticlesComponent

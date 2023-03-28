@@ -1,16 +1,55 @@
 <app-progress-spinner *ngIf="!currentUser"></app-progress-spinner>
+<app-error-message
+  *ngIf="errors$ | async"
+  [error]="errors$ | async"
+></app-error-message>
 
 <div class="container">
   <div class="p-card" *ngIf="currentUser">
     <div class="p-card-content">
       <div class="avatar">
-        <img [src]="currentUser.profileImage || '/assets/icons/avatar-placeholder.svg'" alt="">
+        <div class="image-container">
+          <img
+            [src]="currentUser.profileImage && '/api/' + currentUser.profileImage || '/assets/icons/avatar-placeholder.svg'"
+            alt="Profile image">
+          <br/>
+          <input
+            type='file'
+            (change)="onSelectFile($event)"
+            class="select-profile-picture"
+            accept="image/*"
+          >
+        </div>
+        <small *ngIf="profileImage">Selected photo ↬ <span>{{ profileImage.name }}</span></small>
+        <div class="avatar-actions">
+          <button
+            *ngIf="profileImage"
+            (click)="submitProfileImage()"
+            [disabled]="isSubmitting$ | async"
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-save"
+            class="p-button-rounded"
+          ></button>
+          &nbsp;
+          <button
+            *ngIf="profileImage || currentUser.profileImage"
+            (click)="clearProfileImage()"
+            [disabled]="isSubmitting$ | async"
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-danger"
+          ></button>
+        </div>
         <h3>{{ currentUser.username }}</h3>
         <p>{{ currentUser.email }}</p>
       </div>
       <div class="settings">
         <h1>Profile settings</h1>
-        <form [formGroup]="form" (ngSubmit)="submit()">
+        <form [formGroup]="form" (ngSubmit)="submit(this.form.value)">
           <div class="row">
             <div class="p-field">
               <label for="username" class="input-label">Username</label>
@@ -26,6 +65,9 @@
                 <small class="p-error block"
                        *ngIf="username?.errors?.['required']"
                 >Fill in the field!</small>
+                <small class="p-error block"
+                       *ngIf="username?.errors?.['maxlength']"
+                >The maximum length of the name is 20 characters!</small>
               </div>
             </div>
             <div class="p-field">
@@ -49,6 +91,23 @@
             </div>
           </div>
           <div class="p-field">
+            <label for="specialization" class="input-label">Specialization</label>
+            <input
+              [style]="{width: '100%'}"
+              id="specialization"
+              type="specialization"
+              aria-describedby="specialization-help"
+              pInputText
+              placeholder="Your specialization"
+              formControlName="specialization"
+            />
+            <div class="input-errors" *ngIf="specialization?.invalid && (specialization?.dirty || specialization?.touched)">
+              <small class="p-error block"
+                     *ngIf="specialization?.errors?.['maxlength']"
+              >The max length of the specialization is 50!</small>
+            </div>
+          </div>
+          <div class="p-field">
             <label for="bio" class="input-label">Bio</label>
             <textarea
               placeholder="Tell us about yourself"
@@ -61,43 +120,14 @@
             </textarea>
             <div class="input-errors" *ngIf="bio?.invalid && (bio?.dirty || bio?.touched)">
               <small class="p-error block"
-                     *ngIf="bio?.errors?.['required']"
-              >Fill in the field!</small>
-              <small class="p-error block"
                      *ngIf="bio?.errors?.['maxlength']"
-              >The max length of the short description is 400!</small>
-              <small class="p-error block"
-                     *ngIf="bio?.errors?.['minlength']"
-              >The min length of the short description is 200!</small>
+              >The max length of the bio is 300!</small>
             </div>
           </div>
-          <div class="p-field">
-            <label for="phone" class="input-label">Phone</label>
-            <p-inputMask
-              mask="999-(99)-999-9999"
-              placeholder="Your phone number"
-              id="phone"
-              formControlName="phone"
-            ></p-inputMask>
-            <div class="input-errors" *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)">
-
-            </div>
-          </div>
-          <div class="p-field">
-            <label for="residence" class="input-label">Select a Country</label>
-            <p-dropdown
-              id="residence"
-              [options]="countries"
-              formControlName="residence"
-              placeholder="Select a Country"
-              optionLabel="name"
-              [showClear]="true"
-            ></p-dropdown>
-          </div>
-          <div class="p-field">
+          <div class="p-field social-networks">
             <ng-container formArrayName="socialNetworks">
+              <label for="socialNetworks" class="input-label">Your social networks</label>
               <ng-container *ngFor="let social of socialNetworks.controls; let i = index">
-                <label for="socialNetworks" class="input-label">Your social networks</label>
                 <div class="group" [formGroupName]='i' id="socialNetworks">
                   <p-dropdown
                     [options]="socials"
@@ -113,22 +143,84 @@
                     formControlName="url"
                   />
                 </div>
+                <div class="input-errors"
+                     *ngIf="socialNetworks.at(i).get('name')?.invalid
+                     && (socialNetworks.at(i).get('name')?.dirty || socialNetworks.at(i).get('name')?.touched)">
+                  <small class="p-error block"
+                         *ngIf="socialNetworks.at(i).get('name')?.errors?.['required']"
+                  >Fill in the field!</small>
+                </div>
+                <div class="input-errors"
+                     *ngIf="socialNetworks.at(i).get('url')?.invalid
+                     && (socialNetworks.at(i).get('url')?.dirty || socialNetworks.at(i).get('url')?.touched)">
+                  <small class="p-error block"
+                         *ngIf="socialNetworks.at(i).get('url')?.errors?.['required']"
+                  >Fill in the field!</small>
+                  <small class="p-error block"
+                         *ngIf="socialNetworks.at(i).get('url')?.errors?.['pattern']"
+                  >Specify the link to your social network!</small>
+                </div>
               </ng-container>
+              <div class="social-networks-footer">
+                <button
+                  [disabled]="socialNetworks.controls.length === 4"
+                  (click)="addSocialNetwork()"
+                  [style]="'marginTop: 10px'"
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="pi pi-plus"
+                  class="p-button-rounded"
+                ></button>
+                &nbsp;
+                <button
+                  [disabled]="socialNetworks.controls.length === 0"
+                  (click)="removeSocialNetwork()"
+                  [style]="'marginTop: 10px'"
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="pi pi-minus"
+                  class="p-button-rounded"
+                ></button>
+              </div>
             </ng-container>
+          </div>
+          <div class="p-field">
+            <label for="phone" class="input-label">Phone</label>
+            <p-inputMask
+              [mask]="mask"
+              [placeholder]="residence?.value ? 'Input your phone number' : 'Please select a Country'"
+              id="phone"
+              formControlName="phone"
+              [readonly]="!residence?.value"
+            ></p-inputMask>
+          </div>
+          <div class="p-field">
+            <label for="residence" class="input-label">Select a Country</label>
+            <p-dropdown
+              (onChange)="countrySelected(residence?.value)"
+              id="residence"
+              [options]="countries"
+              formControlName="residence"
+              placeholder="Select a Country"
+              optionLabel="label"
+              [showClear]="true"
+            ></p-dropdown>
           </div>
           <div class="form-footer">
             <button pButton type="submit"
                     label="Сhange profile"
-                    [disabled]="form.invalid"
+                    [disabled]="form.invalid || (isSubmitting$ | async)"
             ></button>
           </div>
-<!--          <p-progressBar-->
-<!--            *ngIf="isSubmitting"-->
-<!--            mode="indeterminate"-->
-<!--            [style]="{-->
-<!--          'height': '6px',-->
-<!--          'margin': '5px 0'-->
-<!--        }"></p-progressBar>-->
+          <p-progressBar
+            *ngIf="isSubmitting$ | async"
+            mode="indeterminate"
+            [style]="{
+          'height': '6px',
+          'margin': '5px 0'
+        }"></p-progressBar>
         </form>
       </div>
     </div>

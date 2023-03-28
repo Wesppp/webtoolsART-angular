@@ -7,8 +7,8 @@ import {
   getCurrentUserFailureAction,
   getCurrentUserSuccessAction
 } from "../actions/getCurrentUser.action";
-import {PersistanceService} from "../../../shared/services/persistance.service";
-import {CurrentUserInterface} from "../../../shared/types/currentUser.interface";
+import { PersistanceService } from "../../../shared/services/persistance.service";
+import { CurrentUserInterface } from "../../../shared/types/currentUser.interface";
 
 
 @Injectable()

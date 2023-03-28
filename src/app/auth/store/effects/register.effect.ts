@@ -6,19 +6,22 @@ import { AuthService } from "../../services/auth.service";
 import { CurrentUserInterface } from "../../../shared/types/currentUser.interface";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
+import {ClearAuthFormService} from "../../services/clear-auth-form.service";
 
 @Injectable()
 export class RegisterEffect {
 
   constructor(private actions$: Actions,
               private authService: AuthService,
-              private router: Router) {}
+              private router: Router,
+              private clearAuthFormService: ClearAuthFormService) {}
 
   register$ = createEffect(() => this.actions$.pipe(
     ofType(registerAction),
     switchMap(({request}) => {
       return this.authService.register(request).pipe(
         map((currentUser: CurrentUserInterface) => {
+          this.clearAuthFormService.clearForm()
           return registerSuccessAction({currentUser})
         }),
         catchError((errorResponse: HttpErrorResponse) => {

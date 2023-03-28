@@ -1,36 +1,45 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { RxwebValidators } from "@rxweb/reactive-form-validators";
 import {select, Store} from "@ngrx/store";
 import { registerAction } from "../../store/actions/register.action";
 import { RegisterRequestInterface } from "../../types/registerRequest.interface";
-import { Observable } from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {backendErrorsSelector, isSubmittingSelector} from "../../store/selectors";
 import {BackendErrorsInterface} from "../../../shared/types/backendErrors.interface";
+import {ClearAuthFormService} from "../../services/clear-auth-form.service";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['../../../shared/styles/formStyles.scss']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit, OnDestroy{
   public form!: FormGroup
 
   public isSubmitting$!: Observable<boolean>
   public errors$!: Observable<BackendErrorsInterface | null>
+  private clearFormSubscription!: Subscription
 
   constructor(private fb: FormBuilder,
-              private store: Store) {
+              private store: Store,
+              private clearAuthFormService: ClearAuthFormService) {
   }
 
   ngOnInit(): void {
     this.createForm()
     this.initializeValues()
+    this.initializeListeners()
   }
 
   createForm(): void {
     this.form = this.fb.group({
-      username: ['', Validators.required],
+      username: ['',
+        [
+          Validators.required,
+          Validators.maxLength(20)
+        ]
+      ],
       email: ['',
         [
           Validators.email,
@@ -56,6 +65,11 @@ export class RegisterComponent {
   initializeValues(): void {
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
     this.errors$ = this.store.pipe(select(backendErrorsSelector))
+  }
+
+  initializeListeners(): void {
+    this.clearFormSubscription = this.clearAuthFormService.clearForm$
+      .subscribe(() => this.form.reset())
   }
 
   get username() {
@@ -84,7 +98,9 @@ export class RegisterComponent {
     }
 
     this.store.dispatch(registerAction({request}))
+  }
 
-    this.form.reset()
+  ngOnDestroy(): void {
+    this.clearFormSubscription.unsubscribe()
   }
 }

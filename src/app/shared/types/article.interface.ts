@@ -9,4 +9,5 @@ export interface ArticleInterface {
   sourceLink: string
   createdAt: string
   updatedAt: string
+  favoritesCount: number
 }

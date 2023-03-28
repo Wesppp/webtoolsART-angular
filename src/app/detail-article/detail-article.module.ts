@@ -18,6 +18,7 @@ import { DeleteArticleService } from "./services/delete-article.service";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ConfirmationService } from 'primeng/api';
 import { DeleteArticleEffect } from "./store/effects/deleteArticle.effect";
+import {AddToFavoritesModule} from "../shared/modules/add-to-favorites/add-to-favorites.module";
 
 const routes: Routes = [
   {
@@ -45,7 +46,8 @@ const routes: Routes = [
     ButtonModule,
     RippleModule,
     BrowserAnimationsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    AddToFavoritesModule
   ],
   providers: [
     SharedArticleService,

@@ -1,4 +1,6 @@
-<app-error-message [error]="errors$ | async">
+<app-error-message
+  *ngIf="errors$ | async"
+  [error]="errors$ | async">
 </app-error-message>
 <app-article-form
   (submitForm)="createArticle($event)"

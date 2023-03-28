@@ -1,0 +1,19 @@
+<div class="add-to-favorites">
+  <button
+    (click)="handleLike()"
+    [disabled]="isSubmitting$ | async"
+    pButton
+    pRipple
+    type="button"
+    icon="pi pi-heart"
+    [ngClass]="{
+    'p-button-rounded': true,
+    'p-button-help': true,
+    'p-button-text': !isFavorite
+  }">
+  </button>
+  <small>
+    {{ isFavorite ? 'You and ' + (favoritesCount-1) + ' added to favorites' : favoritesCount + ' added to favorites' }}
+  </small>
+</div>
+

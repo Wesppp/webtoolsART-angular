@@ -24,6 +24,9 @@
           <small class="p-error block"
                  *ngIf="username?.errors?.['required']"
           >Fill in the field!</small>
+          <small class="p-error block"
+                 *ngIf="username?.errors?.['maxlength']"
+          >The maximum length of the name is 20 characters!</small>
         </div>
       </div>
       <div class="p-field">

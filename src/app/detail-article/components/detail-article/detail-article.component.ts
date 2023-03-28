@@ -8,8 +8,9 @@ import { ActivatedRoute } from "@angular/router";
 import { getArticleAction } from "../../store/actions/getArticle.action";
 import { currentUserSelector } from "../../../auth/store/selectors";
 import { CurrentUserInterface } from "../../../shared/types/currentUser.interface";
-import { ConfirmationService, MessageService } from "primeng/api";
+import { ConfirmationService } from "primeng/api";
 import { deleteArticleAction } from "../../store/actions/deleteArticle.action";
+import { getCurrentUserAction } from "../../../auth/store/actions/getCurrentUser.action";
 
 @Component({
   selector: 'app-detail-article',
@@ -24,6 +25,7 @@ export class DetailArticleComponent implements OnInit, OnDestroy {
   public isLoading$!: Observable<boolean>
   public errors$!: Observable<BackendErrorsInterface | null>
   public isAuthor$!: Observable<boolean>
+  public isFavorite$!: Observable<boolean>
 
   constructor(private store: Store,
               private route: ActivatedRoute,
@@ -51,6 +53,18 @@ export class DetailArticleComponent implements OnInit, OnDestroy {
         }
       )
     )
+    this.isFavorite$ = combineLatest(
+      this.store.pipe(select(articleSelector)),
+      this.store.pipe(select(currentUserSelector))
+    ).pipe(
+      map(
+        ([article, currentUser]:
+           [ArticleInterface | null, CurrentUserInterface | null]) => {
+          if (!article || !currentUser || !currentUser.favoritesArticles) { return false }
+          return currentUser.favoritesArticles.includes(article._id)
+        }
+      )
+    )
   }
 
   initializeListeners(): void {
@@ -67,6 +81,7 @@ export class DetailArticleComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.articleSubscription.unsubscribe()
+    this.store.dispatch(getCurrentUserAction())
   }
 
   deleteArticle() {
