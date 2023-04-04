@@ -4,6 +4,7 @@ import {
   InputArticleRequestInterface
 } from "../../../../types/inputArticleRequest.interface";
 import {ArticleInterface} from "../../../../types/article.interface";
+import {ArticleFormDataInterface} from "../../types/articleFormData.interface";
 
 @Component({
   selector: 'app-article-form',
@@ -49,6 +50,9 @@ export class ArticleFormComponent implements OnInit {
           '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+
           '(\\?[;&a-z\\d%_.~+=-]*)?'+
           '(\\#[-a-z\\d_]*)?$')
+      ]],
+      categories: [this.article?.categories.join(' '), [
+        Validators.pattern(/^[a-zA-Z0-9]+(?:\s[a-zA-Z0-9.]*[a-zA-Z0-9]+)*$/)
       ]]
     })
   }
@@ -69,8 +73,18 @@ export class ArticleFormComponent implements OnInit {
     return this.form.get('sourceLink')
   }
 
-  submit() {
+  get categories() {
+    return this.form.get('categories')
+  }
+
+  submit(formData: ArticleFormDataInterface) {
     if (this.form.invalid) { return }
-    this.submitForm.emit(this.form.value)
+
+    const reqData: InputArticleRequestInterface = {
+      ...formData,
+      categories: formData.categories.split(' ')
+    }
+
+    this.submitForm.emit(reqData)
   }
 }

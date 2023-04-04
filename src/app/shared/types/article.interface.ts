@@ -7,6 +7,7 @@ export interface ArticleInterface {
   quickSummary: string
   description: string
   sourceLink: string
+  categories: string[]
   createdAt: string
   updatedAt: string
   favoritesCount: number

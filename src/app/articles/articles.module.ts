@@ -17,16 +17,16 @@ const routes: Routes = [
     declarations: [
         ArticlesComponent
     ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    ArticleModule,
-    SearchModule,
-    FeedModule,
-    TabViewModule,
-    TabMenuModule,
-    FeedTogglerModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        ArticleModule,
+        SearchModule,
+        FeedModule,
+        TabViewModule,
+        TabMenuModule,
+        FeedTogglerModule
+    ],
     exports: [
         ArticlesComponent
     ]

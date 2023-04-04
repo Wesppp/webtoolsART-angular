@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FavoriteArticlesComponent } from './components/favorite-articles/favorite-articles.component';
+import { ArticleCategoriesComponent } from './components/article-categories/article-categories.component';
 import {RouterModule, Routes} from "@angular/router";
 import {SearchModule} from "../shared/modules/search/search.module";
 import {FeedTogglerModule} from "../shared/modules/feed-toggler/feed-toggler.module";
@@ -9,22 +9,22 @@ import {PopularCategoriesListModule} from "../shared/modules/popular-categories-
 
 const routes: Routes = [
   {
-    path: 'favorite-articles',
-    component: FavoriteArticlesComponent
+    path: 'article-categories/:slug',
+    component: ArticleCategoriesComponent
   }
 ]
 
 @NgModule({
   declarations: [
-    FavoriteArticlesComponent
+    ArticleCategoriesComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    SearchModule,
-    FeedTogglerModule,
-    FeedModule,
-    PopularCategoriesListModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        SearchModule,
+        FeedTogglerModule,
+        FeedModule,
+        PopularCategoriesListModule
+    ]
 })
-export class FavoriteArticlesModule { }
+export class ArticleCategoriesModule { }

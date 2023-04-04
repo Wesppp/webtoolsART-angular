@@ -6,6 +6,22 @@
   margin: 0;
 }
 
+html,
+body {
+  box-sizing: border-box;
+  height: 100%;
+
+  app-root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  app-footer {
+    margin-top: auto;
+  }
+}
+
 .container {
   margin-left: auto;
   margin-right: auto;
@@ -30,4 +46,16 @@ hr {
 
 label {
   font-family: "Shantell Sans", sans-serif;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: rgba(65, 156, 255, 0.25);
+}
+*::-webkit-scrollbar-thumb {
+  background: #6331a1;
+  border-radius: 20px;
+  border: 3px solid #6331a1;;
 }

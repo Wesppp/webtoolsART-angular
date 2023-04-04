@@ -1,0 +1,43 @@
+.card {
+  padding: 1rem;
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  background: #343e4da1;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.skeleton-container {
+  margin: 10px 0;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+:host ::ng-deep p-tag {
+  margin: 0 .6rem;
+  cursor: pointer;
+  white-space: nowrap;
+  scroll-snap-align: center;
+
+  .p-tag {
+    transition: .2s;
+
+    &:hover {
+      color: #e5e5e5;
+    }
+  }
+
+  .text-base {
+    padding: 8px 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: "Shantell Sans", sans-serif;
+  }
+}
+

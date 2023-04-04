@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  margin-top: 10px;
+  padding: 0;
+
+  .card {
+
+  }
+
+  h3 {
+    color: #d33a2c;
+    font-family: "Shantell Sans", sans-serif;
+    display: inline;
+  }
+}
+
+
+:host ::ng-deep p-tag {
+  margin: 0 .6rem;
+  cursor: pointer;
+  transition: .4s;
+
+  span {
+    margin-bottom: 10px;
+  }
+
+  .text-base {
+    padding: 4px 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: "Shantell Sans", sans-serif;
+  }
+}

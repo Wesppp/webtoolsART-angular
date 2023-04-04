@@ -14,7 +14,7 @@ export class FeedTogglerComponent implements OnInit {
 
   ngOnInit(): void {
     this.items = [
-      { label: 'Your favorites articles', icon: 'pi pi-fw pi-heart-fill', routerLink: ['favorite-articles'] },
+      { label: 'Your favorites articles', icon: 'pi pi-fw pi-heart-fill', routerLink: ['/favorite-articles'] },
       { label: 'All articles', icon: 'pi pi-fw pi-book', routerLink: [''] },
     ];
 

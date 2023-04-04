@@ -1,6 +1,6 @@
 <p-panel [routerLink]="['/articles', article._id]">
   <ng-template pTemplate="header">
-    <p-avatar [image]="'assets/icons/avatar-placeholder.svg' || article.author.profileImage"
+    <p-avatar [image]="article.author.profileImage && '/api/' + article.author.profileImage || 'assets/icons/avatar-placeholder.svg'"
               styleClass="mr-2"
               size="large">
     </p-avatar>

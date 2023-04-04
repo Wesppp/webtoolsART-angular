@@ -1,0 +1,21 @@
+<div class="skeleton-container" *ngIf="(isLoading$ | async) && !(popularCategories$ | async)">
+  <p-skeleton *ngFor="let i of [1,2,3,4,5]"
+              height="25px"
+              width="100px"
+              styleClass="mb-2"></p-skeleton>
+</div>
+
+<div
+  class="card flex justify-content-center gap-2"
+  *ngIf="popularCategories$ | async">
+  <p-tag *ngFor="let category of popularCategories$ | async"
+         (click)="handleTagClick(category)"
+         [style]="{ 'background': 'linear-gradient(-225deg, #2196f3 0%, #2196f3 48%, #2196f3 100%)'}">
+    <div class="flex align-items-center gap-2">
+      <span class="text-base">{{ category }}</span>
+    </div>
+  </p-tag>
+</div>
+
+
+

@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="header">
+    <div class="title">
+      <p>ARTICLES {{ (articlesCount$ | async) || 0 }}</p>
+      <h1>Category: <span>{{ category }}</span></h1>
+      <small>There you can find different articles about devtools</small>
+    </div>
+    <app-search #search></app-search>
+  </div>
+  <app-feed-toggler></app-feed-toggler>
+  <app-popular-categories-list></app-popular-categories-list>
+  <app-feed
+    [url]="url"
+    [search]="search.search">
+  </app-feed>
+</div>

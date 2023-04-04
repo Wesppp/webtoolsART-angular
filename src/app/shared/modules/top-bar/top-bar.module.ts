@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { MenubarModule } from 'primeng/menubar';
+import {PopularCategoriesListModule} from "../popular-categories-list/popular-categories-list.module";
 
 
 @NgModule({
@@ -12,8 +13,9 @@ import { MenubarModule } from 'primeng/menubar';
       TopBarComponent
     ],
     imports: [
-      CommonModule,
-      MenubarModule
+        CommonModule,
+        MenubarModule,
+        PopularCategoriesListModule
     ]
 })
 export class TopBarModule { }

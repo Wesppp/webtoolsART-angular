@@ -27,6 +27,7 @@
           class="main-text"
           [innerHTML]="article.description | sanitizeHtml">
         </p>
+        <app-categories-list [categories]="article.categories"></app-categories-list>
       </div>
       <div class="additionally">
         <div class="actions">
