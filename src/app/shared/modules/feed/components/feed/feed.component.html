@@ -18,6 +18,9 @@
   <h2>There are no articles here</h2>
 </ng-container>
 
-
-
+<app-paginator
+  [pageSize]="pageSize"
+  [count]="(articlesCount$ | async) || 0"
+  (eventLoadPage)="loadPage($event)"
+></app-paginator>
 

@@ -4,6 +4,7 @@ import { BackendErrorsInterface } from "../../../../types/backendErrors.interfac
 import { GetFeedResponseInterface } from "../../types/getFeedResponse.interface";
 import { select, Store } from "@ngrx/store";
 import {
+  articlesCountSelector,
   backendErrorsSelector,
   feedDataSelector,
   isFeedDataEmptySelector,
@@ -27,12 +28,15 @@ export class FeedComponent implements OnChanges, OnInit {
   public feedData$!: Observable<GetFeedResponseInterface | null>
   public currentUser$!: Observable<CurrentUserInterface | null>
   public isFeedDataEmpty$!: Observable<boolean>
+  public articlesCount$!: Observable<number | null>
+
+  public pageSize: number = 8;
 
   constructor(private store: Store) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.fetchData()
+    this.loadPage(0);
   }
 
   ngOnInit(): void {
@@ -45,9 +49,12 @@ export class FeedComponent implements OnChanges, OnInit {
     this.isLoading$ = this.store.pipe(select(isLoadingSelector))
     this.currentUser$ = this.store.pipe(select(currentUserSelector))
     this.isFeedDataEmpty$ = this.store.pipe(select(isFeedDataEmptySelector))
+    this.articlesCount$ = this.store.pipe(select(articlesCountSelector))
   }
 
-  fetchData(): void {
-    this.store.dispatch(getFeedAction({ url: this.url }))
+  loadPage(pageNumber: number) {
+    const url = `${this.url}?pageNumber=${pageNumber}&pageSize=${this.pageSize}`;
+
+    this.store.dispatch(getFeedAction({ url }))
   }
 }

@@ -1,0 +1,5 @@
+<p-paginator
+  *ngIf="count"
+  [rows]="pageSize"
+  [totalRecords]="count"
+  (onPageChange)="loadPage($event)"></p-paginator>

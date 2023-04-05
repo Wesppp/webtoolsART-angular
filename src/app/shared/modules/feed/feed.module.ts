@@ -11,6 +11,7 @@ import { ErrorMessageModule } from "../error-message/error-message.module";
 import { ArticleModule } from "../article/article.module";
 import { ProgressSpinnerModule } from "../progress-spinner/progress-spinner.module";
 import { SearchPipe } from "../../pipes/search.pipe";
+import {PaginatorModule} from "../paginator/paginator.module";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { SearchPipe } from "../../pipes/search.pipe";
     ]),
     ErrorMessageModule,
     ArticleModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    PaginatorModule,
   ],
   providers: [
     FeedService
