@@ -52,7 +52,7 @@ export class ArticleFormComponent implements OnInit {
           '(\\#[-a-z\\d_]*)?$')
       ]],
       categories: [this.article?.categories.join(' '), [
-        Validators.pattern(/^[a-zA-Z0-9]+(?:\s[a-zA-Z0-9.]*[a-zA-Z0-9]+)*$/)
+        Validators.pattern(/^(?!.*\b(\w+)\b.*\b\1\b)[a-zA-Z0-9]+(?:\s[a-zA-Z0-9.]*[a-zA-Z0-9]+)*$/i)
       ]]
     })
   }

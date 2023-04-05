@@ -99,7 +99,7 @@
         <div class="input-errors" *ngIf="categories?.invalid && (categories?.dirty || categories?.touched)">
           <small class="p-error block"
                  *ngIf="categories?.errors?.['pattern']"
-          >Use a space to separate the categories and don't use special characters!</small>
+          >Use a space to separate categories, don't use special characters, and don't repeat categories!</small>
         </div>
       </div>
       <div class="form-footer">

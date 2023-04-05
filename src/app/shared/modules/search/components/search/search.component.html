@@ -3,12 +3,11 @@
     <input type="text"
            pInputText
            placeholder="Search"
-           [(ngModel)]="search"
-           #searchRef/>
+           [(ngModel)]="search"/>
     <button type="button"
             pButton
             pRipple
             icon="pi pi-times"
-            (click)="searchRef.value = ''"></button>
+            (click)="search = ''"></button>
   </div>
 </div>
