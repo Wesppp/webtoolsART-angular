@@ -8,6 +8,7 @@ import { FeedModule } from "../shared/modules/feed/feed.module";
 import { TabViewModule } from "primeng/tabview";
 import { TabMenuModule } from "primeng/tabmenu";
 import { FeedTogglerModule } from "../shared/modules/feed-toggler/feed-toggler.module";
+import {PopularCategoriesListModule} from "../shared/modules/popular-categories-list/popular-categories-list.module";
 
 const routes: Routes = [
   { path: '', component: ArticlesComponent }
@@ -25,7 +26,8 @@ const routes: Routes = [
         FeedModule,
         TabViewModule,
         TabMenuModule,
-        FeedTogglerModule
+        FeedTogglerModule,
+        PopularCategoriesListModule
     ],
     exports: [
         ArticlesComponent

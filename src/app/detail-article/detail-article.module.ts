@@ -20,6 +20,7 @@ import { ConfirmationService } from 'primeng/api';
 import { DeleteArticleEffect } from "./store/effects/deleteArticle.effect";
 import { AddToFavoritesModule } from "../shared/modules/add-to-favorites/add-to-favorites.module";
 import { CategoriesListModule } from "../shared/modules/categories-list/categories-list.module";
+import {PopularCategoriesListModule} from "../shared/modules/popular-categories-list/popular-categories-list.module";
 
 const routes: Routes = [
   {
@@ -49,7 +50,8 @@ const routes: Routes = [
         BrowserAnimationsModule,
         ConfirmDialogModule,
         AddToFavoritesModule,
-        CategoriesListModule
+        CategoriesListModule,
+        PopularCategoriesListModule
     ],
   providers: [
     SharedArticleService,
