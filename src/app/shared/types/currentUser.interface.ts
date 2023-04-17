@@ -6,6 +6,7 @@ export interface CurrentUserInterface {
   updatedAt: string
   username: string
   email: string
+  role: string
   bio?: string
   specialization?: string
   profileImage?: string

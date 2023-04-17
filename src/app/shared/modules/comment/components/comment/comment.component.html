@@ -1,0 +1,92 @@
+<p-panel>
+  <ng-template pTemplate="header">
+    <div class="header">
+      <p class="author-info">
+        <span>
+          Commented by
+          <a [routerLink]="['/profile', comment.author._id]">{{ comment.author.username }}</a>
+        </span>
+      </p>
+      <p class="date-info">{{ comment.createdAt | date: 'MMM d, y' }}</p>
+    </div>
+  </ng-template>
+  {{ comment.text }}
+  <ng-template pTemplate="footer">
+    <div class="actions">
+      <div class="card flex justify-content-center">
+        <p-button
+          *ngIf="comment.repliesCount"
+          (click)="getCommentReplies()"
+          [icon]="repliesVisible ? 'pi pi-angle-up' : 'pi pi-angle-down'"
+          iconPos="right"
+          styleClass="p-button-link"
+          [label]="comment.repliesCount + ' replies'">
+        </p-button>
+        <p-button
+          (click)="showDialog('bottom')"
+          icon="pi pi-comments"
+          iconPos="right"
+          styleClass="p-button-link"
+          label="Reply">
+        </p-button>
+        <p-dialog
+          header="Your reply to the comment"
+          [(visible)]="visible"
+          [position]="position"
+          [style]="{width: '50vw'}">
+          <ng-template pTemplate="content">
+            <app-comment-form
+              [submitButtonLabel]="'Reply'"
+              [commentText]="'@' + comment.author.username"
+              (submitFormEvent)="replyComment($event)">
+            </app-comment-form>
+          </ng-template>
+        </p-dialog>
+      </div>
+      <div class="actions-author" *ngIf="isCommentAuthor">
+        <p-overlayPanel #op>
+          <ng-template pTemplate="content">
+            <app-comment-form
+              [submitButtonLabel]="'Save'"
+              (submitFormEvent)="updateComment($event)"
+              [commentText]="comment.text">
+            </app-comment-form>
+          </ng-template>
+        </p-overlayPanel>
+        <button
+          (click)="op.toggle($event)"
+          pButton
+          pRipple
+          label="Edit"
+          icon="pi pi-pencil">
+        </button>
+        <button
+          (click)="deleteComment(comment._id)"
+          pButton
+          pRipple
+          label="Delete"
+          class="p-button-danger"
+          icon="pi pi-trash">
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</p-panel>
+<ng-container *ngIf="repliesVisible">
+  <div class="replies">
+    <ng-container *ngFor="let reply of replies$ | async">
+      <app-comment
+        *ngIf="reply.parentComment === comment._id"
+        [comment]="reply"
+        [parentCommentId]="comment._id"
+        [currentUsername]="currentUsername"
+        (deleteReplyEvent)="deleteReply()"
+        (addReplyEvent)="addReply()"
+      ></app-comment>
+    </ng-container>
+  </div>
+  <app-progress-spinner
+    *ngIf="(isLoading$ | async) && !(replies$ | async)">
+  </app-progress-spinner>
+</ng-container>
+

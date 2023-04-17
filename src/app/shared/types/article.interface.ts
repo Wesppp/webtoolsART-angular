@@ -11,4 +11,5 @@ export interface ArticleInterface {
   createdAt: string
   updatedAt: string
   favoritesCount: number
+  comments: string[]
 }

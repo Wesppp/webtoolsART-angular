@@ -1,0 +1,31 @@
+<form [formGroup]="form" (ngSubmit)="submitForm(form.value)">
+  <div class="p-field">
+    <label for="comments-textarea" class="input-label">
+      {{ commentText ? 'Edit your comment:' : 'Leave a comment:' }}
+    </label>
+    <textarea
+      formControlName="text"
+      rows="3"
+      placeholder="Your comment here"
+      cols="30"
+      id="comments-textarea"
+      pInputTextarea
+      [autoResize]="true"></textarea>
+    <div class="input-errors" *ngIf="text?.invalid && (text?.dirty || text?.touched)">
+      <small class="p-error block"
+             *ngIf="text?.errors?.['minlength']"
+      >The min length of the comment is 2!</small>
+      <small class="p-error block"
+             *ngIf="text?.errors?.['maxlength']"
+      >The max length of the comment is 400!</small>
+    </div>
+  </div>
+  <div class="form-footer">
+    <button pButton type="submit"
+            [label]="submitButtonLabel"
+            [icon]="isSubmitting ? 'pi pi-spin pi-spinner' : 'pi pi-send'"
+            iconPos="right"
+            [disabled]="form.invalid || isSubmitting"
+    ></button>
+  </div>
+</form>

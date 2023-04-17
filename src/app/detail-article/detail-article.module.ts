@@ -21,6 +21,7 @@ import { DeleteArticleEffect } from "./store/effects/deleteArticle.effect";
 import { AddToFavoritesModule } from "../shared/modules/add-to-favorites/add-to-favorites.module";
 import { CategoriesListModule } from "../shared/modules/categories-list/categories-list.module";
 import {PopularCategoriesListModule} from "../shared/modules/popular-categories-list/popular-categories-list.module";
+import {CommentsModule} from "../shared/modules/comments/comments.module";
 
 const routes: Routes = [
   {
@@ -51,7 +52,8 @@ const routes: Routes = [
         ConfirmDialogModule,
         AddToFavoritesModule,
         CategoriesListModule,
-        PopularCategoriesListModule
+        PopularCategoriesListModule,
+        CommentsModule
     ],
   providers: [
     SharedArticleService,

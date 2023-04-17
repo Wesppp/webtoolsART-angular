@@ -35,15 +35,6 @@ body {
 @media only screen and (min-width: 1200px) { .container { max-width: 1140px; } }
 @media only screen and (min-width: 1400px) { .container { max-width: 1320px; } }
 
-hr {
-  order: 1;
-  background-color: #8dd0ff;
-  border: none;
-  height: 2px;
-  color: #8dd0ff;
-  margin: 5px 0;
-}
-
 label {
   font-family: "Shantell Sans", sans-serif;
 }

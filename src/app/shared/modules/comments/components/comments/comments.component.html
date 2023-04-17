@@ -1,0 +1,34 @@
+<div class="title">
+  <h1>
+    Comments
+    <p-badge
+      [value]="(totalCommentsCount$ | async)?.toString() || '0'"
+      [style]="{'position':'absolute','top':'0','right':'-25px'}">
+    </p-badge>
+  </h1>
+</div>
+<hr>
+<app-comment-form
+  [submitButtonLabel]="'Send a comment'"
+  (submitFormEvent)="addComment($event)"
+  [isSubmitting]="!!(isSubmitting$ | async)">
+</app-comment-form>
+<ng-container *ngIf="(comments$ | async)?.length; else message">
+  <ng-container *ngFor="let comment of (comments$ | async)">
+    <app-comment
+      [currentUsername]="(currentUser$ | async)!.username"
+      [comment]="comment">
+    </app-comment>
+  </ng-container>
+</ng-container>
+<ng-template #message>
+  <h2>There are no comments here</h2>
+</ng-template>
+
+<app-error-message
+  *ngIf="errors$ | async"
+  [error]="errors$ | async"
+></app-error-message>
+<app-progress-spinner
+  *ngIf="(isLoading$ | async) && !(comments$ | async)">
+</app-progress-spinner>

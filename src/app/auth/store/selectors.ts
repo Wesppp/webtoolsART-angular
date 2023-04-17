@@ -33,3 +33,8 @@ export const currentUserSelector = createSelector(
   (authState: AuthStateInterface) => authState.currentUser
 )
 
+export const currentUserRoleSelector = createSelector(
+  authFeatureSelector,
+  (authState: AuthStateInterface) => authState.currentUser?.role || 'user'
+)
+

@@ -1,0 +1,32 @@
+:host ::ng-deep .p-panel {
+  margin: 1.4rem 0;
+
+  .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .author-info {
+      span {
+        a {
+          color: #f85565;
+        }
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .actions-author {
+      display: flex;
+      gap: 10px;
+    }
+  }
+}
+
+.replies {
+  padding-left: 3rem;
+}

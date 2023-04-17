@@ -16,9 +16,15 @@
             {{ article.author.username }}
           </span>.
         </ng-container>
-        {{ article.createdAt | date: 'MMM d, y' }}
+        {{ article.createdAt | date: 'MMM d, y' }}.
       </p>
-      <small> Last update {{ article.updatedAt | date: 'MMM d, y' }} </small>
+      <p>
+        <small>
+          <span>{{ article.comments.length }}</span> comments
+        </small>
+        /
+        <small> Last update {{ article.updatedAt | date: 'MMM d, y' }} </small>
+      </p>
     </div>
   </ng-template>
 </p-panel>
