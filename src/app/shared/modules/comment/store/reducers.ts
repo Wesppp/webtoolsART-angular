@@ -8,12 +8,12 @@ import {
   getCommentRepliesSuccessAction
 } from "./actions/getCommentReplies.action";
 import {
-  deleteCommentFailureAction,
-  deleteCommentSuccessAction
+  deleteCommentFailureAction as deleteReplyFailureAction,
+  deleteCommentSuccessAction as deleteReplySuccessAction
 } from "../../comments/store/actions/deleteComment.action";
 import {
-  updateCommentFailureAction,
-  updateCommentSuccessAction
+  updateCommentFailureAction as updateReplyFailureAction,
+  updateCommentSuccessAction as updateReplySuccessAction
 } from "../../comments/store/actions/updateComment.action";
 import {routerNavigationAction} from "@ngrx/router-store";
 
@@ -52,7 +52,8 @@ export const commentReducer = createReducer(
       ...state,
       isLoading: false,
       replies: state.replies ?
-        [...state.replies, ...action.replies] : [...action.replies]
+        [...state.replies, ...action.replies.filter(reply => state.replies && !state.replies.find(r => r._id === reply._id))]
+        : [...action.replies]
     })
   ),
   on(
@@ -63,21 +64,21 @@ export const commentReducer = createReducer(
     })
   ),
   on(
-    deleteCommentSuccessAction,
+    deleteReplySuccessAction,
     (state: CommentStateInterface, action) => ({
       ...state,
       replies: state.replies?.filter(reply => reply._id !== action.comment._id) || null,
     })
   ),
   on(
-    deleteCommentFailureAction,
+    deleteReplyFailureAction,
     (state: CommentStateInterface, action) => ({
       ...state,
       errors: action.errors
     })
   ),
   on(
-    updateCommentSuccessAction,
+    updateReplySuccessAction,
     (state: CommentStateInterface, action) => ({
       ...state,
       replies: state.replies?.map(reply =>
@@ -86,7 +87,7 @@ export const commentReducer = createReducer(
     })
   ),
   on(
-    updateCommentFailureAction,
+    updateReplyFailureAction,
     (state: CommentStateInterface, action) => ({
       ...state,
       errors: action.errors

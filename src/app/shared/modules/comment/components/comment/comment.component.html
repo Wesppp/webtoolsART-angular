@@ -74,19 +74,17 @@
 </p-panel>
 <ng-container *ngIf="repliesVisible">
   <div class="replies">
-    <ng-container *ngFor="let reply of replies$ | async">
-      <app-comment
-        *ngIf="reply.parentComment === comment._id"
-        [comment]="reply"
-        [parentCommentId]="comment._id"
-        [currentUsername]="currentUsername"
-        (deleteReplyEvent)="deleteReply()"
-        (addReplyEvent)="addReply()"
-      ></app-comment>
-    </ng-container>
+    <app-comment
+      *ngFor="let reply of replies$ | async"
+      [comment]="reply"
+      [parentCommentId]="comment._id"
+      [currentUsername]="currentUsername"
+      (deleteReplyEvent)="deleteReply()"
+      (addReplyEvent)="addReply()"
+    ></app-comment>
   </div>
   <app-progress-spinner
-    *ngIf="(isLoading$ | async) && !(replies$ | async)">
+    *ngIf="(isLoading$ | async)">
   </app-progress-spinner>
 </ng-container>
 

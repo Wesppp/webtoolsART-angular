@@ -24,7 +24,6 @@ export class AddToFavoriteEffect {
 
       return article$.pipe(
         map((article: ArticleInterface) => {
-          console.log(article)
           return addToFavoritesSuccessAction({ article })
         }),
         catchError(() => {

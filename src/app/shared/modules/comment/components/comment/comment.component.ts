@@ -8,7 +8,7 @@ import {updateCommentAction} from "../../../comments/store/actions/updateComment
 import {deleteCommentAction} from "../../../comments/store/actions/deleteComment.action";
 import {ConfirmationService} from "primeng/api";
 import {getCommentRepliesAction} from "../../store/actions/getCommentReplies.action";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 import {isLoadingSelector, repliesSelector} from "../../store/selectors";
 
 @Component({
@@ -45,7 +45,10 @@ export class CommentComponent implements OnInit {
   initializeValues(): void {
     this.isCommentAuthor = this.comment.author.username === this.currentUsername
     this.isLoading$ = this.store.pipe(select(isLoadingSelector))
-    this.replies$ = this.store.pipe(select(repliesSelector))
+    this.replies$ = this.store.pipe(
+      select(repliesSelector),
+      map(replies => replies?.filter(reply => reply.parentComment === this.comment._id) || null)
+    )
   }
 
   deleteComment(slug: string): void {
@@ -70,11 +73,12 @@ export class CommentComponent implements OnInit {
   }
 
   replyComment(formValue: FormValueInterface): void {
+    this.visible = false
     const request: CommentRequestInterface = {
       text: formValue.text,
       slug: this.parentCommentId || this.comment._id
     }
-    this.visible = false
+
     this.store.dispatch(replyCommentAction({ request }))
 
     if(this.parentCommentId) {
