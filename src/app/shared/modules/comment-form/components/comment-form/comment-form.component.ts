@@ -11,6 +11,7 @@ export class CommentFormComponent implements OnInit {
   @Input() isSubmitting!: boolean
   @Input() commentText: string = ''
   @Input() submitButtonLabel: string = 'Send'
+  @Input() isLoggedIn!: boolean | null
 
   @Output() submitFormEvent = new EventEmitter<FormValueInterface>()
 

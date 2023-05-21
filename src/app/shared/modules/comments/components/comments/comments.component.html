@@ -9,6 +9,7 @@
 </div>
 <hr>
 <app-comment-form
+  [isLoggedIn]="isLoggedIn$ | async"
   [submitButtonLabel]="'Send a comment'"
   (submitFormEvent)="addComment($event)"
   [isSubmitting]="!!(isSubmitting$ | async)">

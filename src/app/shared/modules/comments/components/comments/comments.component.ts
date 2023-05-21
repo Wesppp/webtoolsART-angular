@@ -15,7 +15,7 @@ import {CommentRequestInterface} from "../../../../types/commentRequest.interfac
 import {FormValueInterface} from "../../../comment-form/types/formValue.interface";
 import {addCommentAction} from "../../store/actions/addComment.action";
 import {CurrentUserInterface} from "../../../../types/currentUser.interface";
-import {currentUserSelector} from "../../../../../auth/store/selectors";
+import {currentUserSelector, isLoggedInSelector} from "../../../../../auth/store/selectors";
 
 @Component({
   selector: 'app-comments',
@@ -33,7 +33,7 @@ export class CommentsComponent implements OnInit {
   public isSubmitting$!: Observable<boolean>
   public currentUser$!: Observable<CurrentUserInterface | null>
   public totalCommentsCount$!: Observable<number>
-
+  public isLoggedIn$!: Observable<boolean>
   constructor(private store: Store) {}
 
   ngOnInit(): void {
@@ -42,6 +42,7 @@ export class CommentsComponent implements OnInit {
   }
 
   initializeValues(): void {
+    this.isLoggedIn$ = this.store.pipe(select(isLoggedInSelector))
     this.comments$ = this.store.pipe(select(commentsSelector))
     this.isLoading$ = this.store.pipe(select(isLoadingSelector))
     this.errors$ = this.store.pipe(select(backendErrorsSelector))
