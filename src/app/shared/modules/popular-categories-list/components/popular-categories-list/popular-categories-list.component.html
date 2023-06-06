@@ -8,7 +8,7 @@
 <div
   class="card flex justify-content-center gap-2"
   *ngIf="popularCategories$ | async">
-  <p-tag *ngFor="let category of popularCategories$ | async"
+  <p-tag *ngFor="let category of popularCategories$ | async; trackBy: trackByCategory"
          (click)="handleTagClick(category)"
          [style]="{ 'background': 'linear-gradient(-225deg, #2196f3 0%, #2196f3 48%, #2196f3 100%)'}">
     <div class="flex align-items-center gap-2">

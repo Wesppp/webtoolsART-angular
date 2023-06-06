@@ -63,4 +63,8 @@ export class CommentsComponent implements OnInit {
 
     this.store.dispatch(addCommentAction({ request }))
   }
+
+  public trackByCommentId(index: number, comment: CommentInterface): string {
+    return comment._id;
+  }
 }

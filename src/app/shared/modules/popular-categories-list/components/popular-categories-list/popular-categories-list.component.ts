@@ -35,4 +35,8 @@ export class PopularCategoriesListComponent implements OnInit {
   fetchPopularCategories(): void {
     this.store.dispatch(getPopularCategoriesAction())
   }
+
+  public trackByCategory(index: number, category: string): string {
+    return category;
+  }
 }

@@ -75,7 +75,7 @@
 <ng-container *ngIf="repliesVisible">
   <div class="replies">
     <app-comment
-      *ngFor="let reply of replies$ | async"
+      *ngFor="let reply of replies$ | async; trackBy: trackByReplyId"
       [comment]="reply"
       [parentCommentId]="comment._id"
       [currentUsername]="currentUsername"

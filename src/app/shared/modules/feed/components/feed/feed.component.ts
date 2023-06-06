@@ -13,6 +13,7 @@ import {
 import { getFeedAction } from "../../store/actions/getFeed.action";
 import {CurrentUserInterface} from "../../../../types/currentUser.interface";
 import {currentUserSelector} from "../../../../../auth/store/selectors";
+import {ArticleInterface} from "../../../../types/article.interface";
 
 @Component({
   selector: 'app-feed',
@@ -56,5 +57,9 @@ export class FeedComponent implements OnChanges, OnInit {
     const url = `${this.url}?pageNumber=${pageNumber}&pageSize=${this.pageSize}`;
 
     this.store.dispatch(getFeedAction({ url }))
+  }
+
+  trackByArticleId(index: number, article: ArticleInterface): string {
+    return article._id
   }
 }

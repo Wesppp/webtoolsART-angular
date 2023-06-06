@@ -7,7 +7,7 @@
 </app-progress-spinner>
 
 <ng-container *ngIf="feedData$ | async">
-  <ng-container *ngFor="let article of (feedData$ | async)?.articles | search: 'title':search">
+  <ng-container *ngFor="let article of (feedData$ | async)?.articles | search: 'title':search; trackBy: trackByArticleId">
     <app-article
       [article]="article"
     ></app-article>

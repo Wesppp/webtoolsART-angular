@@ -6,8 +6,8 @@
     <textarea
       formControlName="text"
       rows="3"
-      [readOnly]="!isLoggedIn"
-      [placeholder]=" isLoggedIn ? 'Your comment here' : 'Log in to your profile to leave a comment'"
+      [readOnly]="!(isLoggedIn$ | async)"
+      [placeholder]="(isLoggedIn$ | async) ? 'Your comment here' : 'Log in to your profile to leave a comment'"
       cols="30"
       id="comments-textarea"
       pInputTextarea

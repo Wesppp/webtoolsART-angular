@@ -118,4 +118,8 @@ export class CommentComponent implements OnInit {
       repliesCount: this.comment.repliesCount + 1
     }
   }
+
+  public trackByReplyId(index: number, reply: CommentInterface): string {
+    return reply._id;
+  }
 }

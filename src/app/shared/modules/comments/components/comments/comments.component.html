@@ -9,15 +9,14 @@
 </div>
 <hr>
 <app-comment-form
-  [isLoggedIn]="isLoggedIn$ | async"
   [submitButtonLabel]="'Send a comment'"
   (submitFormEvent)="addComment($event)"
   [isSubmitting]="!!(isSubmitting$ | async)">
 </app-comment-form>
 <ng-container *ngIf="(comments$ | async)?.length; else message">
-  <ng-container *ngFor="let comment of (comments$ | async)">
+  <ng-container *ngFor="let comment of (comments$ | async); trackBy: trackByCommentId">
     <app-comment
-      [currentUsername]="(currentUser$ | async)!.username"
+      [currentUsername]="(currentUser$ | async)?.username || ''"
       [comment]="comment">
     </app-comment>
   </ng-container>
