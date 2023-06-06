@@ -15,7 +15,7 @@ import {SearchModule} from "../shared/modules/search/search.module";
 
 const routes: Routes = [
   {
-    path: 'profile/:slug',
+    path: '',
     component: ProfileComponent
   }
 ]

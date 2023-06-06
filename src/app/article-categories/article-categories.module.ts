@@ -9,7 +9,7 @@ import {PopularCategoriesListModule} from "../shared/modules/popular-categories-
 
 const routes: Routes = [
   {
-    path: 'article-categories/:slug',
+    path: '',
     component: ArticleCategoriesComponent
   }
 ]

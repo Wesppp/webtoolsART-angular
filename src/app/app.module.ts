@@ -14,16 +14,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ArticlesModule } from "./articles/articles.module";
 import { ErrorPageModule } from "./error-page/error-page.module";
-import { CreateArticleModule } from "./create-article/create-article.module";
 import { DetailArticleModule } from "./detail-article/detail-article.module";
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { EditArticleModule } from "./edit-article/edit-article.module";
-import { ProfileModule } from "./profile/profile.module";
-import { ProfileSettingsModule } from "./profile-settings/profile-settings.module";
-import { FavoriteArticlesModule } from "./favorite-articles/favorite-articles.module";
 import { JWT_OPTIONS, JwtHelperService } from "@auth0/angular-jwt";
-import { ArticleCategoriesModule } from "./article-categories/article-categories.module";
-import {FooterModule} from "./shared/modules/footer/footer.module";
+import { FooterModule } from "./shared/modules/footer/footer.module";
+import { IsLoggedInGuard } from "./shared/guards/isLoggedIn.guard";
 
 @NgModule({
   declarations: [
@@ -35,12 +30,6 @@ import {FooterModule} from "./shared/modules/footer/footer.module";
         AppRoutingModule,
         TopBarModule,
         ArticlesModule,
-        FavoriteArticlesModule,
-        ArticleCategoriesModule,
-        ProfileModule,
-        CreateArticleModule,
-        EditArticleModule,
-        ProfileSettingsModule,
         AuthModule,
         DetailArticleModule,
         BrowserAnimationsModule,
@@ -59,7 +48,8 @@ import {FooterModule} from "./shared/modules/footer/footer.module";
       multi: true
     },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    JwtHelperService
+    JwtHelperService,
+    IsLoggedInGuard
   ],
   bootstrap: [AppComponent]
 })

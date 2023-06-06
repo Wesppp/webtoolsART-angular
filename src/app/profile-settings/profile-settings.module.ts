@@ -26,7 +26,7 @@ import {DeleteProfileImageEffect} from "./store/effects/deleteProfileImage.effec
 
 const routes: Routes = [
   {
-    path: 'profile-settings',
+    path: '',
     component: ProfileSettingsComponent
   }
 ]

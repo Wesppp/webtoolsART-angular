@@ -15,7 +15,7 @@ import { UpdateArticleEffect } from "./store/effects/updateArticle.effect";
 
 const routes: Routes = [
   {
-    path: 'articles/:articleId/edit',
+    path: '',
     component: EditArticleComponent
   }
 ]
